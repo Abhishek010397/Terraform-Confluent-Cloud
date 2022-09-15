@@ -13,22 +13,6 @@ resource "confluent_network" "aws-peering" {
   }
 }
 
-resource "confluent_peering" "aws" {
-  display_name = "AWS Peering"
-  aws {
-    account         = "784364363154"
-    vpc             = "vpc-bd6804c0"
-    routes          = ["172.31.0.0/16"]
-    customer_region = "us-east-1"
-  }
-  environment {
-    id = confluent_environment.sandbox.id
-  }
-  network {
-    id = confluent_network.aws-peering.id
-  }
-}
-
 resource "confluent_kafka_cluster" "dedicated-clusters" {
   display_name = "dedicated_kafka_cluster"
   availability = "MULTI_ZONE"
